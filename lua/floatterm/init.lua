@@ -7,6 +7,7 @@ local M = {}
 ---@field title string|nil Optional window title
 ---@field cmd string|nil Command to run in the terminal (defaults to 'shell')
 ---@field start_insert boolean Enter terminal mode after opening
+---@field exit_key string|false Terminal-mode key that leaves terminal mode (false to disable)
 local defaults = {
   width = 0.8,
   height = 0.8,
@@ -14,6 +15,7 @@ local defaults = {
   title = nil,
   cmd = nil,
   start_insert = false,
+  exit_key = "<Esc><Esc>",
 }
 
 M.config = vim.deepcopy(defaults)
@@ -73,6 +75,12 @@ function M.open()
       vim.cmd.terminal()
     end
     vim.bo[state.buf].buflisted = false
+    if M.config.exit_key then
+      vim.keymap.set("t", M.config.exit_key, [[<C-\><C-n>]], {
+        buffer = state.buf,
+        desc = "Floatterm: exit terminal mode",
+      })
+    end
   else
     vim.api.nvim_win_call(state.win, function()
       vim.cmd("normal! G")

@@ -79,6 +79,7 @@ require("floatterm").setup({
   title = nil,          -- e.g. " Terminal "
   cmd = nil,            -- command to run instead of 'shell', e.g. "lazygit"
   start_insert = false, -- enter terminal mode right after opening
+  exit_key = "<Esc><Esc>", -- leave terminal mode (buffer-local); false to disable
 })
 ```
 
@@ -100,8 +101,5 @@ ft.close()
 ft.is_open() -- boolean
 ```
 
-Tip: leave terminal mode with `<C-\><C-n>`. A handy mapping:
-
-```lua
-vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
-```
+Leave terminal mode with `<Esc><Esc>` (configurable via `exit_key`) or the built-in `<C-\><C-n>`.
+A single `<Esc>` is still passed to the shell, so programs like `fzf` or `vim` inside the terminal keep working.
