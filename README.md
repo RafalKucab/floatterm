@@ -9,6 +9,8 @@ Minimal Neovim plugin that toggles a persistent terminal in a centered floating 
 
 > Inspired by one of [TJ DeVries](https://www.youtube.com/@teej_dv)' YouTube videos on building a floating terminal in Neovim.
 
+![floatterm in action](assets/floatterm.png)
+
 ## Requirements
 
 - Neovim >= 0.9 (`title` option needs 0.9+)
